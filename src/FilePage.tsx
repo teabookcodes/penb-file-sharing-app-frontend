@@ -1,6 +1,7 @@
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 export default function FilePage() {
@@ -14,7 +15,7 @@ export default function FilePage() {
   async function downloadFile() {
     try {
       const response = await axios.post(
-        `http://localhost:8000/file/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/file/${id}`,
         { password },
         { responseType: "blob" }
       );
@@ -26,7 +27,7 @@ export default function FilePage() {
 
       saveAs(response.data, fileName);
     } catch (error) {
-      console.error("Error downloading file:", error);
+      toast.error("Při stahování souboru se vyskytla chyba");
     }
   }
 

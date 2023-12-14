@@ -6,6 +6,7 @@ import {
   SetStateAction,
   useState,
 } from "react";
+import toast from "react-hot-toast";
 
 interface PasswordFormProps {
   fileId: string | undefined;
@@ -38,7 +39,7 @@ function PasswordForm({
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/verify-password",
+        `${import.meta.env.VITE_BACKEND_URL}/verify-password`,
         formData
       );
       if (response.data) {
@@ -47,7 +48,7 @@ function PasswordForm({
         setGeneralPassword(formData.password);
       }
     } catch (error) {
-      console.error("Error: ", error);
+      toast.error("Vyskytla se neznámá chyba");
     }
   };
 

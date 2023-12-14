@@ -1,6 +1,7 @@
 import axios from "axios";
 import saveAs from "file-saver";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaCoins, FaCreditCard, FaUpload } from "react-icons/fa6";
 import { ColorRing } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
@@ -36,7 +37,7 @@ function DownloadForm({ fileData, password }: DownloadFormProps) {
     setTimeout(() => {}, 3000);
     try {
       const response = await axios.post(
-        `http://localhost:8000/file/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/file/${id}`,
         { password },
         { responseType: "blob" }
       );
@@ -48,7 +49,7 @@ function DownloadForm({ fileData, password }: DownloadFormProps) {
 
       saveAs(response.data, fileName);
     } catch (error) {
-      console.error("Error downloading file:", error);
+      toast.error("Při stahování souboru se vyskytla chyba");
     } finally {
       setLoading(false);
     }

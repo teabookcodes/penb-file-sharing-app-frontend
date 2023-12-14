@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useAuth } from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -21,14 +22,14 @@ function LoginForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/login",
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
         formData
       );
       const token = response.data;
       login(token);
       setError(null);
     } catch (error) {
-      console.error("Error logging in:", error);
+      toast.error("Vyskytla se neznámá chyba");
       setError("Neplatné přihlašovací údaje. Zkuste to prosím znovu.");
     }
   };

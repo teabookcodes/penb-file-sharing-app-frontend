@@ -1,7 +1,6 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Navigate } from "react-router-dom";
 
 function UploadForm() {
   const [formData, setFormData] = useState({
@@ -34,7 +33,6 @@ function UploadForm() {
   const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0];
     setFormData((prevData) => ({ ...prevData, file: file || null }));
-    console.log(file);
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -42,7 +40,7 @@ function UploadForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/upload",
+        `${import.meta.env.VITE_BACKEND_URL}/upload`,
         formData,
         {
           headers: {
@@ -53,10 +51,9 @@ function UploadForm() {
 
       if (response.data) {
         toast.success("Soubor byl úspěšně nahrán a odeslán klientovi");
-        <Navigate to="/" />;
       }
     } catch (error) {
-      console.error("Error uploading file:", error);
+      toast.error("Při nahrávání souboru se vyskytla chyba");
     }
   };
 
