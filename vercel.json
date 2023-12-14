@@ -2,15 +2,15 @@
   "routes": [
     {
       "src": "/download/:id",
-      "dest": "/index.html"
+      "dest": "/dist/index.html"
     },
     {
       "src": "/download/.*",
-      "dest": "/index.html"
+      "dest": "/dist/index.html"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/dist/index.html"
     }
   ]
 }
