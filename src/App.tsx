@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import DownloadPage from "./DownloadPage";
 import HomePage from "./HomePage";
 import LoginPage from "./LoginPage";
+import TestDownloadPage from "./TestDownloadPage";
 import UploadPage from "./UploadPage";
 import { ProtectedLayout } from "./components/ProtectedLayout";
 import { PublicLayout } from "./components/PublicLayout";
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/:id" element={<DownloadPage />}></Route>
+          <Route path="/test" element={<TestDownloadPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
         </Route>
         <Route element={<ProtectedLayout />}>
