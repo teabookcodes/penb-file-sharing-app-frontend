@@ -15,9 +15,9 @@ function App() {
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route element={<PublicLayout />}>
-          <Route path="/:id" element={<DownloadPage />}></Route>
           <Route path="/test" element={<TestDownloadPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/:id" element={<DownloadPage />}></Route>
         </Route>
         <Route element={<ProtectedLayout />}>
           <Route path="/" element={<HomePage />}></Route>

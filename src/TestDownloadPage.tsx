@@ -1,17 +1,24 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import DownloadForm from "./components/DownloadForm";
+import TestDownloadForm from "./components/TestDownloadForm";
+
+export type FileData = {
+  name: string;
+  description: string;
+  price: number;
+  file: File | null;
+  createdAt: number;
+};
 
 export default function DownloadPage() {
-  const [verified, setVerified] = useState(true);
-  const fileData = {
+  const [verified] = useState(true);
+  const fileData: FileData = {
     name: "Testovací zakázka",
     description: "Test",
     price: 30,
-    file: null as File | null,
+    file: null,
     createdAt: Date.now(),
   };
-  const [password, setPassword] = useState("");
+  const [password] = useState("");
 
   return (
     <div className="w-full">
@@ -19,7 +26,9 @@ export default function DownloadPage() {
         Stáhnout soubor
       </h1>
       <div className="mt-4">
-        {verified && <DownloadForm fileData={fileData} password={password} />}
+        {verified && (
+          <TestDownloadForm fileData={fileData} password={password} />
+        )}
       </div>
     </div>
   );
