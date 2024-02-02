@@ -8,7 +8,7 @@ export default function DownloadPage() {
   const [verified, setVerified] = useState(false);
   const [fileData, setFileData] = useState<JSON | null>(null);
   const [password, setPassword] = useState("");
-  const [paid, setPaid] = useState(false);
+  // const [paid, setPaid] = useState(false);
 
   return (
     <div className="w-full">
@@ -24,9 +24,7 @@ export default function DownloadPage() {
             setGeneralPassword={setPassword}
           />
         )}
-        {verified && !paid && (
-          <PayForm fileData={fileData} password={password} />
-        )}
+        {verified && <PayForm fileData={fileData} password={password} />}
         {/* {verified && paid && (
           <DownloadForm fileData={fileData} password={password} />
         )} */}

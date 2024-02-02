@@ -15,10 +15,9 @@ interface FileData {
 
 interface DownloadFormProps {
   fileData: JSON | null;
-  password: string;
 }
 
-function DownloadForm({ fileData, password }: DownloadFormProps) {
+function DownloadForm({ fileData }: DownloadFormProps) {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const parsedFileData = JSON.parse(JSON.stringify(fileData)) as FileData;
