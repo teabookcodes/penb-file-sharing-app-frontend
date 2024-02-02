@@ -11,7 +11,7 @@ import "./index.css";
 
 function App() {
   return (
-    <div className="container mx-auto min-h-screen pt-4">
+    <div className="container min-h-screen pt-4 mx-auto">
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route element={<PublicLayout />}>

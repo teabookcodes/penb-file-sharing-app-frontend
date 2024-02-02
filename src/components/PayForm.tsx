@@ -1,8 +1,7 @@
 import axios from "axios";
-import saveAs from "file-saver";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaCoins, FaDownload, FaUpload } from "react-icons/fa6";
+import { FaCoins, FaCreditCard, FaUpload } from "react-icons/fa6";
 import { ColorRing } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
 
@@ -18,7 +17,7 @@ interface DownloadFormProps {
   password: string;
 }
 
-function DownloadForm({ fileData, password }: DownloadFormProps) {
+function PayForm({ fileData, password }: DownloadFormProps) {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const parsedFileData = JSON.parse(JSON.stringify(fileData)) as FileData;
@@ -32,23 +31,20 @@ function DownloadForm({ fileData, password }: DownloadFormProps) {
         minute: "numeric",
       })
     : null;
-  async function downloadFile() {
+  async function payFile() {
     setLoading(true);
     setTimeout(() => {}, 3000);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/download/${id}`,
-        { responseType: "blob" }
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/file/${id}`,
+        { password }
       );
 
-      const contentDisposition = response.headers["content-disposition"];
-      const fileNameMatch =
-        contentDisposition && contentDisposition.match(/filename="(.+)"$/);
-      const fileName = fileNameMatch ? fileNameMatch[1] : "downloaded-file";
-
-      saveAs(response.data, fileName);
+      if (response.status === 200) {
+        window.location.href = response.data;
+      }
     } catch (error) {
-      toast.error("Při stahování souboru se vyskytla chyba");
+      toast.error("Při platbě nebo stahování souboru se vyskytla chyba");
     } finally {
       setLoading(false);
     }
@@ -85,15 +81,15 @@ function DownloadForm({ fileData, password }: DownloadFormProps) {
         </div>
       ) : (
         <button
-          onClick={() => downloadFile()}
+          onClick={() => payFile()}
           className="mx-auto flex gap-2 items-center justify-center text-white bg-primary hover:bg-primaryDarker focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm w-full px-5 py-2.5 text-center"
         >
-          <FaDownload />
-          Stáhnout
+          <FaCreditCard />
+          Zaplatit
         </button>
       )}
     </div>
   );
 }
 
-export default DownloadForm;
+export default PayForm;
