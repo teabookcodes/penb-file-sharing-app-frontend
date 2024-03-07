@@ -9,7 +9,6 @@ function UploadForm() {
     price: 0,
     file: null as File | null,
     clientEmail: "",
-    password: "",
   });
 
   useEffect(() => {
@@ -92,7 +91,6 @@ function UploadForm() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-secondary focus:border-secondary block w-full p-2.5"
           value={formData.description}
           onChange={handleInputChange}
-          required
         />
       </div>
       <div className="mb-5">
@@ -123,22 +121,6 @@ function UploadForm() {
           id="clientEmail"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-secondary focus:border-secondary block w-full p-2.5"
           value={formData.clientEmail}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900"
-        >
-          Heslo
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-secondary focus:border-secondary block w-full p-2.5"
-          value={formData.password}
           onChange={handleInputChange}
           required
         />

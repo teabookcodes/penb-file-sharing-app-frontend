@@ -14,10 +14,9 @@ interface FileData {
 
 interface DownloadFormProps {
   fileData: JSON | null;
-  password: string;
 }
 
-function PayForm({ fileData, password }: DownloadFormProps) {
+function PayForm({ fileData }: DownloadFormProps) {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const parsedFileData = JSON.parse(JSON.stringify(fileData)) as FileData;
@@ -36,8 +35,7 @@ function PayForm({ fileData, password }: DownloadFormProps) {
     setTimeout(() => {}, 3000);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/file/${id}`,
-        { password }
+        `${import.meta.env.VITE_BACKEND_URL}/file/${id}`
       );
 
       if (response.status === 200) {
